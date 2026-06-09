@@ -162,7 +162,7 @@
   .row.selected .ck .tick { opacity:1; } .row.indet .ck .dash { opacity:1; }
   .name-cell { display:flex; align-items:center; gap:9px; min-width:0; }
   .chev { width:15px; height:15px; color:var(--text-tertiary); flex-shrink:0; transition:transform .18s; cursor:pointer; }
-  .chev.spacer { visibility:hidden; }
+  .chev.ph { visibility:hidden; cursor:default; }
   .folder.open > .row .chev { transform:rotate(90deg); }
   .ficon { width:17px; height:17px; flex-shrink:0; }
   .name-txt b { font-size:var(--text-sm); font-weight:500; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -287,13 +287,13 @@
           <div class="folder-children">
             <div class="row child file" data-row data-file>
               <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev spacer"></span><svg class="ficon" style="color:#0ea5e9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>treated_R1.fastq.gz<span class="ext-badge">fastq</span></b></div></div>
+              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#0ea5e9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>treated_R1.fastq.gz<span class="ext-badge">fastq</span></b></div></div>
               <div class="cell">FASTQ</div><div class="cell mono">1.6 GB</div><div class="cell">Jun 6</div>
               <div class="actions"><button class="fileAction" data-tip="Mention"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></button><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
             </div>
             <div class="row child file" data-row data-file>
               <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev spacer"></span><svg class="ficon" style="color:#0ea5e9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>treated_R2.fastq.gz<span class="ext-badge">fastq</span></b></div></div>
+              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#0ea5e9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>treated_R2.fastq.gz<span class="ext-badge">fastq</span></b></div></div>
               <div class="cell">FASTQ</div><div class="cell mono">1.8 GB</div><div class="cell">Jun 6</div>
               <div class="actions"><button class="fileAction" data-tip="Mention"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></button><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
             </div>
@@ -310,13 +310,13 @@
           <div class="folder-children">
             <div class="row child file" data-row data-file>
               <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev spacer"></span><svg class="ficon" style="color:#0ea5e9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>GRCh38.fa<span class="ext-badge">fa</span></b></div></div>
+              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#0ea5e9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>GRCh38.fa<span class="ext-badge">fa</span></b></div></div>
               <div class="cell">FASTA</div><div class="cell mono">820 MB</div><div class="cell">Jun 2</div>
               <div class="actions"><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
             </div>
             <div class="row child file" data-row data-file>
               <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev spacer"></span><svg class="ficon" style="color:#14b8a6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>GRCh38.gtf<span class="ext-badge">gtf</span></b></div></div>
+              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#14b8a6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>GRCh38.gtf<span class="ext-badge">gtf</span></b></div></div>
               <div class="cell">GTF</div><div class="cell mono">100 MB</div><div class="cell">Jun 2</div>
               <div class="actions"><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
             </div>
@@ -326,13 +326,13 @@
         <!-- loose files -->
         <div class="row file" data-row data-file>
           <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-          <div class="name-cell"><span class="chev spacer"></span><svg class="ficon" style="color:#22c55e" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>sample_metadata.csv<span class="ext-badge">csv</span></b></div></div>
+          <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#22c55e" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>sample_metadata.csv<span class="ext-badge">csv</span></b></div></div>
           <div class="cell">CSV</div><div class="cell mono">42 KB</div><div class="cell">May 30</div>
           <div class="actions"><button class="fileAction" data-tip="Mention"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></button><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
         </div>
         <div class="row file" data-row data-file>
           <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-          <div class="name-cell"><span class="chev spacer"></span><svg class="ficon" style="color:#94a3b8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>pbmc_3k.h5ad<span class="ext-badge">h5ad</span></b></div></div>
+          <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#94a3b8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>pbmc_3k.h5ad<span class="ext-badge">h5ad</span></b></div></div>
           <div class="cell">AnnData</div><div class="cell mono">228 MB</div><div class="cell">May 28</div>
           <div class="actions"><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
         </div>
@@ -348,19 +348,19 @@
           <div class="conv-body">
             <div class="row file" data-row data-file>
               <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev spacer"></span><svg class="ficon" style="color:#0ea5e9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>treated_R1.fastq.gz</b></div></div>
+              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#0ea5e9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>treated_R1.fastq.gz</b></div></div>
               <div class="cell"><span class="tag in">input</span></div><div class="cell mono">1.6 GB</div><div class="cell">Jun 7</div>
               <div class="actions"><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
             </div>
             <div class="row file" data-row data-file>
               <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev spacer"></span><svg class="ficon" style="color:#22c55e" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>deg_results.csv</b></div></div>
+              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#22c55e" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>deg_results.csv</b></div></div>
               <div class="cell"><span class="tag out">output</span></div><div class="cell mono">310 KB</div><div class="cell">Jun 7</div>
               <div class="actions"><button class="fileAction" data-tip="Preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
             </div>
             <div class="row file" data-row data-file>
               <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev spacer"></span><svg class="ficon" style="color:#a855f7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9" r="1.8"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><div class="name-txt"><b>volcano_plot.png</b></div></div>
+              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#a855f7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9" r="1.8"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><div class="name-txt"><b>volcano_plot.png</b></div></div>
               <div class="cell"><span class="tag out">output</span></div><div class="cell mono">540 KB</div><div class="cell">Jun 7</div>
               <div class="actions"><button class="fileAction" data-tip="Preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
             </div>
@@ -371,7 +371,7 @@
           <div class="conv-body">
             <div class="row file" data-row data-file>
               <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev spacer"></span><svg class="ficon" style="color:#a855f7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9" r="1.8"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><div class="name-txt"><b>umap_clusters.png</b></div></div>
+              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#a855f7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9" r="1.8"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><div class="name-txt"><b>umap_clusters.png</b></div></div>
               <div class="cell"><span class="tag out">output</span></div><div class="cell mono">720 KB</div><div class="cell">Jun 4</div>
               <div class="actions"><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
             </div>
