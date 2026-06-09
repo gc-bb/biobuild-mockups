@@ -1,399 +1,354 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>BioBuild · File Management (mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
+  /* ===== BioBuild design tokens (from src/styles/design-tokens.css) ===== */
   :root {
-    --bg: #f6f7f5;
-    --panel: #ffffff;
-    --ink: #16201c;
-    --ink-soft: #5c6b64;
-    --ink-faint: #93a39b;
-    --line: #e6eae6;
-    --line-strong: #d6ddd7;
-    --accent: #0e8a6e;
-    --accent-soft: #e3f4ee;
-    --accent-ink: #0a5f4c;
-    --blue: #2563eb;
-    --blue-soft: #e8efff;
-    --amber: #b4731a;
-    --amber-soft: #fbf0dd;
-    --danger: #c2453b;
-    --radius: 12px;
-    --shadow-sm: 0 1px 2px rgba(22,32,28,.05);
-    --shadow-md: 0 8px 24px -8px rgba(22,32,28,.18);
-    --shadow-lg: 0 18px 50px -12px rgba(22,32,28,.30);
+    --color-blue-400:#5395ff; --color-blue-500:#0062fd; --color-blue-600:#0052d4; --color-blue-700:#1374ff;
+    --color-cyan-400:#4eeae3; --color-cyan-500:#01e4db; --color-cyan-600:#01c4bc;
+    --color-navy-500:#101b2d; --color-navy-700:#060d17; --color-navy-800:#1a1d29; --color-navy-900:#00060f;
+    --font-primary:'Inter',sans-serif; --font-mono:'IBM Plex Mono',monospace;
+    --spacing-xs:4px; --spacing-sm:8px; --spacing-md:12px; --spacing-lg:16px; --spacing-xl:20px; --spacing-2xl:24px;
+    --radius-sm:4px; --radius-md:8px; --radius-lg:10px; --radius-xl:16px; --radius-2xl:20px; --radius-full:9999px;
+    --text-xs:12px; --text-sm:14px; --text-base:16px; --text-lg:18px; --text-xl:23.724px;
+    --tracking-tight:-0.1504px;
+    --transition-base:200ms;
+    --color-gradient-primary:linear-gradient(100.17deg,var(--color-blue-500) 0%,var(--color-cyan-500) 119.5%);
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  [data-theme="dark"] {
+    --bg-gradient:linear-gradient(12.86deg,var(--color-navy-900) 0%,var(--color-navy-500) 100%);
+    --bg-secondary:var(--color-navy-500); --bg-tertiary:var(--color-navy-800);
+    --text-primary:#e4e4e4; --text-secondary:rgba(255,255,255,.77); --text-tertiary:rgba(255,255,255,.53); --text-muted:rgba(255,255,255,.41);
+    --text-placeholder:#9f9fa9;
+    --border-primary:rgba(255,255,255,.05); --border-secondary:rgba(255,255,255,.08); --border-light:rgba(255,255,255,.12);
+    --over-soft:rgba(255,255,255,.04); --over-med:rgba(255,255,255,.05); --over-strong:rgba(255,255,255,.08);
+    --card-bg:rgba(13,17,23,.4); --card-border:rgba(255,255,255,.12);
+    --sel-bg:rgba(0,98,253,.12); --sel-border:rgba(0,98,253,.4);
+    --shadow-md:0px 4px 34px 0px rgba(0,0,0,.25);
+    --shadow-lg:0px 4px 84px 0px rgba(0,98,253,.12);
+    --shadow-button:0px 0px 40px -12px rgba(83,149,255,.18),inset 0px .5px 0px 0px rgba(255,255,255,.08);
+    --bar-bg:rgba(16,27,45,.85); --bar-border:rgba(255,255,255,.1);
+  }
+  [data-theme="light"] {
+    --bg-gradient:linear-gradient(180deg,#f0f6ff 0%,#e0edff 100%);
+    --bg-secondary:#ffffff; --bg-tertiary:rgba(255,255,255,.6);
+    --text-primary:#002560; --text-secondary:#70727c; --text-tertiary:#7b7f8b; --text-muted:#023671;
+    --text-placeholder:#7b7f8b;
+    --border-primary:rgba(0,98,253,.15); --border-secondary:rgba(0,98,253,.11); --border-light:rgba(0,98,253,.1);
+    --over-soft:rgba(0,98,253,.05); --over-med:rgba(0,98,253,.06); --over-strong:rgba(0,98,253,.1);
+    --card-bg:rgba(255,255,255,.7); --card-border:rgba(0,98,253,.12);
+    --sel-bg:rgba(0,98,253,.08); --sel-border:rgba(0,98,253,.35);
+    --shadow-md:0px 4px 34px 0px rgba(0,98,253,.13);
+    --shadow-lg:0px 4px 24px 0px rgba(0,98,253,.08);
+    --shadow-button:0px 0px 20px -8px rgba(83,149,255,.12),inset 0px .5px 0px 0px rgba(0,0,0,.05);
+    --bar-bg:rgba(255,255,255,.92); --bar-border:rgba(0,98,253,.15);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { height:100vh; overflow:hidden; }
   body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    -webkit-font-smoothing: antialiased;
-    height: 100vh;
-    overflow: hidden;
+    font-family:var(--font-primary); background:var(--bg-gradient); color:var(--text-primary);
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; letter-spacing:var(--tracking-tight);
   }
-  .mono { font-family: 'JetBrains Mono', monospace; }
+  .mono { font-family:var(--font-mono); }
+  ::-webkit-scrollbar { width:10px; height:10px; }
+  ::-webkit-scrollbar-thumb { background:var(--over-strong); border-radius:8px; border:2px solid transparent; background-clip:padding-box; }
 
-  /* ---------- shell ---------- */
-  .app { display: grid; grid-template-columns: 232px 1fr; height: 100vh; }
+  .app { display:grid; grid-template-columns:256px 1fr; height:100vh; }
 
-  /* ---------- sidebar ---------- */
-  .sidebar {
-    background: #0f1714;
-    color: #cdd8d2;
-    display: flex; flex-direction: column;
-    padding: 18px 14px;
-    gap: 6px;
+  /* ===== sidebar ===== */
+  .sidebar { display:flex; flex-direction:column; background-image:var(--bg-gradient); border-right:1px solid var(--border-primary); }
+  .logoBar { display:flex; align-items:center; gap:8px; height:72px; padding:0 var(--spacing-2xl); }
+  .logoIcon { width:32px; height:36px; display:grid; place-items:center; }
+  .logoIcon svg { transform:rotate(22.4deg); }
+  .logoText { font-family:var(--font-mono); font-weight:600; font-size:var(--text-xl); color:var(--text-primary); }
+  .nav { flex:1; display:flex; flex-direction:column; padding:var(--spacing-sm) var(--spacing-md) var(--spacing-lg); overflow-y:auto; }
+  .navItem {
+    position:relative; display:flex; align-items:center; gap:var(--spacing-md); height:40px;
+    padding-left:var(--spacing-lg); padding-right:var(--spacing-md); border-radius:8px;
+    color:var(--text-secondary); font-weight:500; font-size:var(--text-sm); cursor:pointer; transition:all var(--transition-base);
   }
-  .brand { display: flex; align-items: center; gap: 10px; padding: 6px 8px 18px; }
-  .brand .logo {
-    width: 30px; height: 30px; border-radius: 9px;
-    background: linear-gradient(140deg, #1fd39a, #0e8a6e);
-    display: grid; place-items: center; color: #062019; box-shadow: 0 4px 14px rgba(31,211,154,.3);
-  }
-  .brand .name { font-weight: 800; font-size: 16px; letter-spacing: -.3px; color: #fff; }
-  .nav-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em; color: #6f7e77; padding: 14px 10px 6px; font-weight: 700; }
-  .nav-item {
-    display: flex; align-items: center; gap: 11px;
-    padding: 9px 10px; border-radius: 9px; font-size: 13.5px; font-weight: 500;
-    color: #b7c3bc; cursor: pointer; transition: background .15s, color .15s;
-  }
-  .nav-item svg { width: 17px; height: 17px; opacity: .85; }
-  .nav-item:hover { background: rgba(255,255,255,.05); color: #fff; }
-  .nav-item.active { background: rgba(31,211,154,.14); color: #6ff0c4; }
-  .nav-sub { padding-left: 8px; display: flex; flex-direction: column; gap: 3px; }
-  .nav-sub .nav-item { font-size: 13px; padding: 7px 10px; }
-  .sidebar .spacer { flex: 1; }
-  .user-chip { display:flex; align-items:center; gap:10px; padding:8px; border-radius:10px; background:rgba(255,255,255,.04);}
-  .user-chip .av { width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:grid;place-items:center;color:#fff;font-weight:700;font-size:12px;}
-  .user-chip .meta b { display:block; font-size:12.5px; color:#eaf1ed; font-weight:600;}
-  .user-chip .meta span { font-size:11px; color:#7c8a83;}
+  .navItem svg { width:18px; height:18px; stroke-width:2; transition:color var(--transition-base); }
+  .navItem:hover { color:var(--text-primary); background:var(--over-med); }
+  .navItem.active { color:var(--text-primary); background:var(--over-soft); }
+  .navItem.active svg { color:var(--color-blue-500); }
+  .navItem.active::before { content:''; position:absolute; left:0; top:8px; bottom:8px; width:3px; border-radius:0 3px 3px 0; background:var(--color-blue-500); }
+  .navLabel { padding:14px 12px 6px; font-size:11px; font-weight:600; color:var(--color-blue-500); letter-spacing:.05em; text-transform:uppercase; }
+  .navSub .navItem { font-size:13px; height:36px; }
+  .spacer { flex:1; }
+  .profile { border-top:1px solid var(--border-light); padding:14px var(--spacing-lg); display:flex; align-items:center; gap:var(--spacing-md); }
+  .avatar { position:relative; width:36px; height:36px; border-radius:var(--radius-full); background:linear-gradient(to bottom right,#fb923c,#ec4899); flex-shrink:0; display:grid; place-items:center; color:#fff; font-weight:600; font-size:13px; }
+  .avatar .dot { position:absolute; bottom:0; right:0; width:10px; height:10px; border-radius:var(--radius-full); background:#22c55e; border:2px solid var(--color-navy-500); }
+  [data-theme="light"] .avatar .dot { border-color:#f0f6ff; }
+  .profile .pname { font-weight:600; font-size:var(--text-sm); color:var(--text-primary); line-height:18px; }
+  .profile .prole { font-weight:400; font-size:11px; color:var(--text-tertiary); }
 
-  /* ---------- main ---------- */
-  .main { display: flex; flex-direction: column; min-width: 0; height: 100vh; }
-  .topbar {
-    display: flex; align-items: center; gap: 16px;
-    padding: 18px 28px; background: var(--panel); border-bottom: 1px solid var(--line);
+  /* ===== main ===== */
+  .main { display:flex; flex-direction:column; min-width:0; height:100vh; }
+  .topbar { display:flex; align-items:center; gap:var(--spacing-lg); height:72px; padding:0 var(--spacing-2xl); border-bottom:1px solid var(--border-primary); }
+  .ptitle { font-size:var(--text-lg); font-weight:600; color:var(--text-primary); }
+  .ptitle small { display:block; font-size:var(--text-xs); font-weight:400; color:var(--text-tertiary); margin-top:2px; letter-spacing:0; }
+  .grow { flex:1; }
+  .search { display:flex; align-items:center; gap:9px; width:300px; background:var(--over-soft); border:1px solid var(--border-secondary); border-radius:var(--radius-lg); padding:9px 13px; color:var(--text-placeholder); }
+  .search svg { width:16px; height:16px; }
+  .search input { border:none; background:none; outline:none; font-family:inherit; font-size:13.5px; color:var(--text-primary); width:100%; letter-spacing:var(--tracking-tight); }
+  .search input::placeholder { color:var(--text-placeholder); }
+  .iconbtn { display:grid; place-items:center; width:38px; height:38px; border:1px solid var(--border-secondary); background:var(--over-soft); border-radius:var(--radius-lg); color:var(--text-secondary); cursor:pointer; transition:all var(--transition-base); }
+  .iconbtn:hover { color:var(--text-primary); border-color:var(--border-light); }
+  .iconbtn svg { width:17px; height:17px; }
+  .btn-primary {
+    display:inline-flex; align-items:center; gap:8px; cursor:pointer; border:none;
+    background:var(--color-gradient-primary); color:#fff; padding:9px 16px; border-radius:var(--radius-lg);
+    font-family:inherit; font-size:var(--text-sm); font-weight:600; box-shadow:var(--shadow-button); transition:filter var(--transition-base);
   }
-  .page-title { font-size: 21px; font-weight: 800; letter-spacing: -.5px; }
-  .page-title small { display:block; font-size: 12px; font-weight:500; color: var(--ink-faint); letter-spacing: 0; margin-top:2px;}
-  .topbar .grow { flex: 1; }
-  .search {
-    display: flex; align-items: center; gap: 9px; width: 320px;
-    background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 9px 13px;
-    color: var(--ink-faint); font-size: 13.5px;
-  }
-  .search svg { width: 16px; height: 16px; }
-  .search input { border: none; background: none; outline: none; font-family: inherit; font-size: 13.5px; color: var(--ink); width: 100%; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
-    border: 1px solid var(--line-strong); background: var(--panel); color: var(--ink);
-    padding: 9px 14px; border-radius: 10px; font-family: inherit; font-size: 13.5px; font-weight: 600;
-    transition: background .15s, border-color .15s, transform .05s;
-  }
-  .btn:hover { border-color: var(--ink-faint); }
-  .btn:active { transform: translateY(1px); }
-  .btn svg { width: 16px; height: 16px; }
-  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 6px 16px -6px rgba(14,138,110,.6); }
-  .btn.primary:hover { background: var(--accent-ink); }
+  .btn-primary:hover { filter:brightness(1.08); }
+  .btn-primary svg { width:16px; height:16px; }
 
-  /* ---------- tabs ---------- */
-  .tabs { display: flex; gap: 4px; padding: 14px 28px 0; background: var(--panel); border-bottom: 1px solid var(--line); }
-  .tab {
-    padding: 10px 16px; font-size: 14px; font-weight: 600; color: var(--ink-soft);
-    cursor: pointer; border-bottom: 2.5px solid transparent; margin-bottom: -1px;
-    display: flex; align-items: center; gap: 8px; transition: color .15s;
-  }
-  .tab .count { font-size: 11.5px; background: var(--bg); color: var(--ink-soft); padding: 1px 8px; border-radius: 20px; font-weight: 700; }
-  .tab:hover { color: var(--ink); }
-  .tab.active { color: var(--accent-ink); border-bottom-color: var(--accent); }
-  .tab.active .count { background: var(--accent-soft); color: var(--accent-ink); }
+  /* tabs */
+  .tabs { display:flex; gap:4px; padding:14px var(--spacing-2xl) 0; border-bottom:1px solid var(--border-primary); }
+  .tab { display:flex; align-items:center; gap:8px; padding:10px 14px; font-size:var(--text-sm); font-weight:600; color:var(--text-secondary); cursor:pointer; border-bottom:2.5px solid transparent; margin-bottom:-1px; transition:color var(--transition-base); }
+  .tab svg { width:16px; height:16px; }
+  .tab .count { font-family:var(--font-mono); font-size:11px; background:var(--over-strong); color:var(--text-secondary); padding:1px 7px; border-radius:20px; font-weight:500; }
+  .tab:hover { color:var(--text-primary); }
+  .tab.active { color:var(--color-blue-500); border-bottom-color:var(--color-blue-500); }
+  .tab.active .count { background:rgba(0,98,253,.15); color:var(--color-blue-400); }
 
-  /* ---------- content ---------- */
-  .content { flex: 1; overflow-y: auto; padding: 22px 28px 120px; }
-  .view { display: none; }
-  .view.active { display: block; }
+  /* content */
+  .content { flex:1; overflow-y:auto; padding:20px var(--spacing-2xl) 120px; }
+  .view { display:none; } .view.active { display:block; }
+  .crumbs { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--text-tertiary); margin-bottom:16px; }
+  .crumbs b { color:var(--text-primary); font-weight:600; }
+  .crumbs svg { width:14px; height:14px; }
 
-  .crumbs { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-soft); margin-bottom: 16px; }
-  .crumbs b { color: var(--ink); font-weight: 700; }
-  .crumbs svg { width: 14px; height: 14px; color: var(--ink-faint); }
+  .list-head { display:grid; grid-template-columns:34px 1fr 120px 100px 110px 90px; gap:12px; align-items:center; padding:0 12px 10px; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted); font-weight:600; border-bottom:1px solid var(--border-primary); }
 
-  /* list header */
-  .list-head {
-    display: grid; grid-template-columns: 34px 1fr 130px 110px 120px 40px;
-    gap: 12px; align-items: center;
-    padding: 0 14px 10px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em;
-    color: var(--ink-faint); font-weight: 700; border-bottom: 1px solid var(--line);
-  }
+  .row { display:grid; grid-template-columns:34px 1fr 120px 100px 110px 90px; gap:12px; align-items:center; padding:10px 12px; border-radius:var(--radius-md); cursor:pointer; border:1px solid transparent; transition:background .12s,border-color .12s; }
+  .row:hover { background:var(--over-soft); }
+  .row.selected { background:var(--sel-bg); border-color:var(--sel-border); }
+  .ck { width:18px; height:18px; border-radius:5px; border:2px solid var(--border-light); background:transparent; display:grid; place-items:center; transition:all .12s; }
+  .row.selected .ck { background:var(--color-blue-500); border-color:var(--color-blue-500); }
+  .ck svg { width:11px; height:11px; color:#fff; opacity:0; }
+  .row.selected .ck svg { opacity:1; }
+  .name-cell { display:flex; align-items:center; gap:11px; min-width:0; }
+  .ficon { width:18px; height:18px; flex-shrink:0; }
+  .name-txt { min-width:0; }
+  .name-txt b { font-size:var(--text-sm); font-weight:500; color:var(--text-primary); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .ext-badge { font-family:var(--font-mono); font-size:10px; font-weight:500; text-transform:uppercase; background:var(--over-strong); color:var(--text-tertiary); padding:1px 6px; border-radius:var(--radius-sm); margin-left:8px; }
+  .cell { font-size:13px; color:var(--text-tertiary); }
+  .cell.mono { font-family:var(--font-mono); font-size:12px; }
+  .tag { font-size:10px; font-weight:600; padding:2px 8px; border-radius:20px; letter-spacing:.02em; }
+  .tag.in { background:rgba(0,98,253,.14); color:var(--color-blue-400); }
+  .tag.out { background:rgba(1,228,219,.14); color:var(--color-cyan-500); }
+  .actions { display:flex; gap:4px; justify-content:flex-end; opacity:0; transition:opacity .12s; }
+  .row:hover .actions { opacity:1; }
+  .fileAction { display:grid; place-items:center; width:24px; height:24px; border:none; background:var(--over-med); color:var(--text-tertiary); border-radius:var(--radius-sm); cursor:pointer; transition:all .12s; }
+  .fileAction:hover { color:var(--text-primary); background:var(--over-strong); }
+  .fileAction.danger:hover { color:#ef4444; background:rgba(239,68,68,.15); }
+  .fileAction svg { width:12px; height:12px; }
 
-  /* row */
-  .row {
-    display: grid; grid-template-columns: 34px 1fr 130px 110px 120px 40px;
-    gap: 12px; align-items: center;
-    padding: 11px 14px; border-radius: 10px; cursor: pointer;
-    border: 1px solid transparent; transition: background .12s, border-color .12s;
-    position: relative;
-  }
-  .row:hover { background: var(--panel); border-color: var(--line); box-shadow: var(--shadow-sm); }
-  .row.selected { background: var(--accent-soft); border-color: #bfe6d8; }
-  .row .ck {
-    width: 19px; height: 19px; border-radius: 6px; border: 2px solid var(--line-strong);
-    background: #fff; display: grid; place-items: center; transition: all .12s;
-  }
-  .row.selected .ck { background: var(--accent); border-color: var(--accent); }
-  .row .ck svg { width: 12px; height: 12px; color: #fff; opacity: 0; }
-  .row.selected .ck svg { opacity: 1; }
-  .name-cell { display: flex; align-items: center; gap: 12px; min-width: 0; }
-  .ficon { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; flex-shrink: 0; }
-  .ficon svg { width: 18px; height: 18px; }
-  .ficon.folder { background: var(--amber-soft); color: var(--amber); }
-  .ficon.fastq  { background: #eaf6ef; color: #2f9e64; }
-  .ficon.csv    { background: #e9f1ff; color: #2563eb; }
-  .ficon.img    { background: #f3ecfb; color: #8a4fd6; }
-  .ficon.doc    { background: #fbecec; color: #c2453b; }
-  .ficon.h5     { background: #fff3e0; color: #c47d18; }
-  .name-txt b { font-size: 14px; font-weight: 600; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .name-txt span { font-size: 11.5px; color: var(--ink-faint); }
-  .cell-meta { font-size: 12.5px; color: var(--ink-soft); }
-  .tag { display:inline-block; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:20px; letter-spacing:.03em;}
-  .tag.in  { background: var(--blue-soft); color: var(--blue);}
-  .tag.out { background: var(--accent-soft); color: var(--accent-ink);}
-  .kebab { display: grid; place-items: center; color: var(--ink-faint); opacity: 0; }
-  .row:hover .kebab { opacity: 1; }
-  .kebab svg { width: 17px; height: 17px; }
+  /* conversation groups */
+  .conv { background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius-xl); margin-bottom:12px; overflow:hidden; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); transition:border-color .2s; }
+  .conv:hover { border-color:rgba(0,98,253,.3); }
+  .conv-head { display:flex; align-items:center; gap:13px; padding:13px 16px; cursor:pointer; }
+  .conv-chev { width:18px; height:18px; color:var(--text-tertiary); transition:transform .2s; flex-shrink:0; }
+  .conv.open .conv-chev { transform:rotate(90deg); }
+  .conv-icon { width:34px; height:34px; border-radius:var(--radius-lg); background:var(--color-gradient-primary); opacity:.92; color:#fff; display:grid; place-items:center; flex-shrink:0; }
+  .conv-icon svg { width:17px; height:17px; }
+  .conv-meta { flex:1; min-width:0; }
+  .conv-meta b { font-size:var(--text-sm); font-weight:600; color:var(--text-primary); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .conv-meta span { font-size:12px; color:var(--text-tertiary); }
+  .conv-badges { display:flex; gap:7px; flex-shrink:0; }
+  .pill { display:flex; align-items:center; gap:5px; font-family:var(--font-mono); font-size:11px; font-weight:500; padding:4px 9px; border-radius:20px; }
+  .pill svg { width:12px; height:12px; }
+  .pill.in { background:rgba(0,98,253,.14); color:var(--color-blue-400); }
+  .pill.out { background:rgba(1,228,219,.14); color:var(--color-cyan-500); }
+  .conv-body { display:none; padding:4px 12px 10px 44px; border-top:1px solid var(--border-primary); }
+  .conv.open .conv-body { display:block; }
 
-  /* ---------- conversation groups ---------- */
-  .conv {
-    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
-    margin-bottom: 14px; overflow: hidden; box-shadow: var(--shadow-sm);
-  }
-  .conv-head {
-    display: flex; align-items: center; gap: 14px; padding: 14px 16px; cursor: pointer;
-    transition: background .12s;
-  }
-  .conv-head:hover { background: #fafcfb; }
-  .conv-chev { width: 18px; height: 18px; color: var(--ink-faint); transition: transform .2s; flex-shrink: 0; }
-  .conv.open .conv-chev { transform: rotate(90deg); }
-  .conv-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg,#1fd39a22,#0e8a6e22); color: var(--accent-ink); display: grid; place-items: center; flex-shrink: 0; }
-  .conv-icon svg { width: 19px; height: 19px; }
-  .conv-meta { flex: 1; min-width: 0; }
-  .conv-meta b { font-size: 14.5px; font-weight: 700; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .conv-meta span { font-size: 12px; color: var(--ink-faint); }
-  .conv-badges { display: flex; gap: 7px; align-items: center; flex-shrink: 0; }
-  .pill { font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 20px; display:flex; align-items:center; gap:5px;}
-  .pill svg { width: 12px; height: 12px; }
-  .pill.in { background: var(--blue-soft); color: var(--blue); }
-  .pill.out { background: var(--accent-soft); color: var(--accent-ink); }
-  .conv-body { display: none; padding: 4px 12px 12px 46px; border-top: 1px solid var(--line); }
-  .conv.open .conv-body { display: block; }
-  .conv-body .row { grid-template-columns: 34px 1fr 130px 110px 120px 40px; }
+  /* sticky bulk action bar */
+  .actionbar { position:fixed; left:calc(50% + 128px); bottom:24px; transform:translateX(-50%) translateY(160%); background:var(--bar-bg); border:1px solid var(--bar-border); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-radius:var(--radius-xl); padding:10px 12px 10px 16px; display:flex; align-items:center; gap:8px; box-shadow:var(--shadow-md),var(--shadow-lg); transition:transform .3s cubic-bezier(.22,1,.36,1); z-index:50; }
+  .actionbar.show { transform:translateX(-50%) translateY(0); }
+  .ab-count { display:flex; align-items:center; gap:9px; font-size:13px; font-weight:600; color:var(--text-primary); padding-right:4px; }
+  .ab-count .num { font-family:var(--font-mono); background:var(--color-blue-500); color:#fff; min-width:22px; height:22px; border-radius:6px; display:grid; place-items:center; font-size:12px; font-weight:600; padding:0 5px; }
+  .ab-div { width:1px; height:24px; background:var(--border-light); margin:0 3px; }
+  .ab-btn { display:flex; align-items:center; gap:7px; background:var(--over-med); color:var(--text-secondary); border:none; padding:8px 12px; border-radius:var(--radius-md); font-family:inherit; font-size:13px; font-weight:600; cursor:pointer; transition:all .14s; }
+  .ab-btn:hover { background:var(--over-strong); color:var(--text-primary); }
+  .ab-btn svg { width:15px; height:15px; }
+  .ab-btn.danger:hover { color:#ef4444; background:rgba(239,68,68,.15); }
+  .ab-close { display:grid; place-items:center; background:none; border:none; color:var(--text-tertiary); cursor:pointer; padding:8px; border-radius:var(--radius-sm); margin-left:2px; }
+  .ab-close:hover { color:var(--text-primary); background:var(--over-med); }
+  .ab-close svg { width:16px; height:16px; }
 
-  /* ---------- sticky bulk action bar ---------- */
-  .actionbar {
-    position: fixed; left: 50%; bottom: 26px; transform: transl(-50%, 0) translateX(-50%) translateY(140%);
-    transform: translateX(-50%) translateY(140%);
-    background: #11201b; color: #fff; border-radius: 14px; padding: 11px 12px 11px 18px;
-    display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow-lg);
-    transition: transform .28s cubic-bezier(.22,1,.36,1); z-index: 50; min-width: 540px;
-  }
-  .actionbar.show { transform: translateX(-50%) translateY(0); }
-  .ab-count { font-size: 13.5px; font-weight: 700; display: flex; align-items: center; gap: 10px; padding-right: 6px; }
-  .ab-count .num { background: var(--accent); color: #fff; min-width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; font-size: 13px; }
-  .ab-divider { width: 1px; height: 26px; background: rgba(255,255,255,.16); margin: 0 4px; }
-  .ab-btn {
-    display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,.07); color: #eaf1ed;
-    border: none; padding: 8px 13px; border-radius: 9px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
-    transition: background .14s;
-  }
-  .ab-btn:hover { background: rgba(255,255,255,.15); }
-  .ab-btn svg { width: 15px; height: 15px; }
-  .ab-btn.danger:hover { background: rgba(194,69,59,.85); }
-  .ab-close { margin-left: 4px; background: none; border: none; color: #8fa39a; cursor: pointer; display: grid; place-items: center; padding: 8px; border-radius: 8px; }
-  .ab-close:hover { color: #fff; background: rgba(255,255,255,.08); }
-  .ab-close svg { width: 16px; height: 16px; }
-
-  .hint { margin: 26px auto 0; max-width: 620px; text-align:center; font-size:12.5px; color: var(--ink-faint); background: #fff; border:1px dashed var(--line-strong); border-radius:12px; padding:14px 18px; line-height:1.6;}
-  .hint b { color: var(--ink-soft);}
+  .hint { margin:24px auto 0; max-width:640px; text-align:center; font-size:12.5px; color:var(--text-tertiary); background:var(--card-bg); border:1px dashed var(--border-light); border-radius:var(--radius-xl); padding:14px 18px; line-height:1.6; }
+  .hint b { color:var(--text-secondary); }
 </style>
 </head>
 <body>
 <div class="app">
-  <!-- ============ SIDEBAR ============ -->
+  <!-- ===== SIDEBAR ===== -->
   <aside class="sidebar">
-    <div class="brand">
-      <div class="logo">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="17"><path d="M4 4c6 4 10 8 16 16M20 4C14 8 10 12 4 20" stroke-linecap="round"/></svg>
+    <div class="logoBar">
+      <div class="logoIcon">
+        <svg width="22" height="30" viewBox="0 0 24 24" fill="none" stroke="url(#g)" stroke-width="2.4"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0062fd"/><stop offset="1" stop-color="#01e4db"/></linearGradient></defs><path d="M5 3c7 5 7 13 0 18M19 3c-7 5-7 13 0 18M5 12h14" stroke-linecap="round"/></svg>
       </div>
-      <span class="name">BioBuild</span>
+      <span class="logoText">BioBuild</span>
     </div>
 
-    <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat</div>
-    <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>Capsules</div>
+    <nav class="nav">
+      <div class="navItem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat</div>
+      <div class="navItem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>Capsules</div>
+      <div class="navLabel">Database</div>
+      <div class="navSub">
+        <div class="navItem active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l2-3h14l2 3M3 7h18v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>My Files</div>
+        <div class="navItem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Conversation Files</div>
+        <div class="navItem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>Datasets</div>
+      </div>
+      <div class="spacer"></div>
+    </nav>
 
-    <div class="nav-label">Database</div>
-    <div class="nav-sub">
-      <div class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l2-3h14l2 3M3 7h18v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>My Files</div>
-      <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Conversation Files</div>
-      <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>Datasets</div>
-    </div>
-
-    <div class="spacer"></div>
-    <div class="user-chip">
-      <div class="av">LC</div>
-      <div class="meta"><b>Leon Chuang</b><span>Pro workspace</span></div>
+    <div class="profile">
+      <div class="avatar">LC<span class="dot"></span></div>
+      <div><div class="pname">Leon Chuang</div><div class="prole">Pro workspace</div></div>
     </div>
   </aside>
 
-  <!-- ============ MAIN ============ -->
+  <!-- ===== MAIN ===== -->
   <main class="main">
     <div class="topbar">
-      <div class="page-title">Files<small>Manage uploads &amp; analysis outputs in one place</small></div>
+      <div class="ptitle">Files<small>Manage uploads &amp; analysis outputs in one place</small></div>
       <div class="grow"></div>
       <div class="search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
         <input placeholder="Search files, folders, conversations…" />
       </div>
-      <button class="btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h18M9 3v18"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg></button>
-      <button class="btn primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>Upload</button>
+      <button class="iconbtn" id="themeBtn" title="Toggle theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <button class="iconbtn" title="View"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></button>
+      <button class="btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>Upload</button>
     </div>
 
     <div class="tabs">
-      <div class="tab active" data-view="myfiles"><svg width="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l2-3h14l2 3M3 7h18v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>My Files <span class="count">24</span></div>
-      <div class="tab" data-view="conv"><svg width="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Conversation Files <span class="count">38</span></div>
+      <div class="tab active" data-view="myfiles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l2-3h14l2 3M3 7h18v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>My Files <span class="count">24</span></div>
+      <div class="tab" data-view="conv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Conversation Files <span class="count">38</span></div>
     </div>
 
     <div class="content">
-      <!-- ---------- MY FILES (flat hierarchy, Maya's scope) ---------- -->
+      <!-- ===== MY FILES ===== -->
       <section class="view active" id="view-myfiles">
         <div class="crumbs"><b>My Files</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>All</div>
         <div class="list-head"><span></span><span>Name</span><span>Type</span><span>Size</span><span>Modified</span><span></span></div>
 
         <div class="row" data-sel>
-          <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-          <div class="name-cell"><div class="ficon folder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l2-3h6l2 3h8v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg></div><div class="name-txt"><b>RNA-seq raw reads</b><span>12 items</span></div></div>
-          <div class="cell-meta">Folder</div><div class="cell-meta mono">—</div><div class="cell-meta">Jun 6, 2026</div>
-          <span class="kebab"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>
+          <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <div class="name-cell"><svg class="ficon" style="color:#f59e0b" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l2-3h6l2 3h8v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg><div class="name-txt"><b>RNA-seq raw reads</b></div></div>
+          <div class="cell">Folder</div><div class="cell mono">—</div><div class="cell">Jun 6</div>
+          <div class="actions"><button class="fileAction" title="Mention"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></button><button class="fileAction danger" title="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></button></div>
         </div>
 
         <div class="row" data-sel>
-          <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-          <div class="name-cell"><div class="ficon folder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l2-3h6l2 3h8v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg></div><div class="name-txt"><b>Reference genomes</b><span>4 items</span></div></div>
-          <div class="cell-meta">Folder</div><div class="cell-meta mono">—</div><div class="cell-meta">Jun 2, 2026</div>
-          <span class="kebab"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>
+          <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <div class="name-cell"><svg class="ficon" style="color:#f59e0b" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l2-3h6l2 3h8v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg><div class="name-txt"><b>Reference genomes</b></div></div>
+          <div class="cell">Folder</div><div class="cell mono">—</div><div class="cell">Jun 2</div>
+          <div class="actions"><button class="fileAction danger" title="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></button></div>
         </div>
 
         <div class="row" data-sel>
-          <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-          <div class="name-cell"><div class="ficon fastq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6c4 0 4 12 8 12s4-12 8-12"/><path d="M4 18c4 0 4-12 8-12s4 12 8 12"/></svg></div><div class="name-txt"><b>sample_01_R1.fastq.gz</b><span>uploaded</span></div></div>
-          <div class="cell-meta">FASTQ</div><div class="cell-meta mono">1.8 GB</div><div class="cell-meta">Jun 6, 2026</div>
-          <span class="kebab"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>
+          <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <div class="name-cell"><svg class="ficon" style="color:#0ea5e9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>sample_01_R1.fastq.gz<span class="ext-badge">fastq</span></b></div></div>
+          <div class="cell">FASTQ</div><div class="cell mono">1.8 GB</div><div class="cell">Jun 6</div>
+          <div class="actions"><button class="fileAction" title="Mention"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></button><button class="fileAction" title="Preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="fileAction" title="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
         </div>
 
         <div class="row" data-sel>
-          <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-          <div class="name-cell"><div class="ficon csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div><div class="name-txt"><b>sample_metadata.csv</b><span>uploaded</span></div></div>
-          <div class="cell-meta">CSV</div><div class="cell-meta mono">42 KB</div><div class="cell-meta">May 30, 2026</div>
-          <span class="kebab"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>
+          <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <div class="name-cell"><svg class="ficon" style="color:#22c55e" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M8 13h2M8 17h2M14 13h2M14 17h2"/></svg><div class="name-txt"><b>sample_metadata.csv<span class="ext-badge">csv</span></b></div></div>
+          <div class="cell">CSV</div><div class="cell mono">42 KB</div><div class="cell">May 30</div>
+          <div class="actions"><button class="fileAction" title="Mention"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></button><button class="fileAction" title="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
         </div>
 
         <div class="row" data-sel>
-          <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-          <div class="name-cell"><div class="ficon h5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7v10l8 4 8-4V7l-8-4z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg></div><div class="name-txt"><b>pbmc_3k.h5ad</b><span>uploaded</span></div></div>
-          <div class="cell-meta">AnnData</div><div class="cell-meta mono">228 MB</div><div class="cell-meta">May 28, 2026</div>
-          <span class="kebab"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>
+          <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <div class="name-cell"><svg class="ficon" style="color:#94a3b8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>pbmc_3k.h5ad<span class="ext-badge">h5ad</span></b></div></div>
+          <div class="cell">AnnData</div><div class="cell mono">228 MB</div><div class="cell">May 28</div>
+          <div class="actions"><button class="fileAction" title="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
         </div>
       </section>
 
-      <!-- ---------- CONVERSATION FILES (mounted per conversation) ---------- -->
+      <!-- ===== CONVERSATION FILES ===== -->
       <section class="view" id="view-conv">
         <div class="crumbs"><b>Conversation Files</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>Grouped by conversation</div>
 
-        <!-- conversation 1 (open) -->
         <div class="conv open">
           <div class="conv-head">
             <svg class="conv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg>
             <div class="conv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-            <div class="conv-meta"><b>Differential expression — treated vs control</b><span>Last active Jun 7, 2026 · 7 files</span></div>
-            <div class="conv-badges">
-              <span class="pill in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>4 in</span>
-              <span class="pill out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12l7 7 7-7"/></svg>3 out</span>
-            </div>
+            <div class="conv-meta"><b>Differential expression — treated vs control</b><span>Last active Jun 7 · 7 files</span></div>
+            <div class="conv-badges"><span class="pill in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>4 in</span><span class="pill out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12l7 7 7-7"/></svg>3 out</span></div>
           </div>
           <div class="conv-body">
             <div class="row" data-sel>
-              <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-              <div class="name-cell"><div class="ficon fastq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6c4 0 4 12 8 12s4-12 8-12"/><path d="M4 18c4 0 4-12 8-12s4 12 8 12"/></svg></div><div class="name-txt"><b>treated_R1.fastq.gz</b><span class="tag in">input</span></div></div>
-              <div class="cell-meta">FASTQ</div><div class="cell-meta mono">1.6 GB</div><div class="cell-meta">Jun 7</div>
-              <span class="kebab"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>
+              <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <div class="name-cell"><svg class="ficon" style="color:#0ea5e9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>treated_R1.fastq.gz</b></div></div>
+              <div class="cell"><span class="tag in">input</span></div><div class="cell mono">1.6 GB</div><div class="cell">Jun 7</div>
+              <div class="actions"><button class="fileAction" title="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
             </div>
             <div class="row" data-sel>
-              <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-              <div class="name-cell"><div class="ficon csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div><div class="name-txt"><b>deg_results.csv</b><span class="tag out">output</span></div></div>
-              <div class="cell-meta">CSV</div><div class="cell-meta mono">310 KB</div><div class="cell-meta">Jun 7</div>
-              <span class="kebab"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>
+              <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <div class="name-cell"><svg class="ficon" style="color:#22c55e" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>deg_results.csv</b></div></div>
+              <div class="cell"><span class="tag out">output</span></div><div class="cell mono">310 KB</div><div class="cell">Jun 7</div>
+              <div class="actions"><button class="fileAction" title="Preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="fileAction" title="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
             </div>
             <div class="row" data-sel>
-              <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-              <div class="name-cell"><div class="ficon img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9" r="1.8"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg></div><div class="name-txt"><b>volcano_plot.png</b><span class="tag out">output</span></div></div>
-              <div class="cell-meta">PNG</div><div class="cell-meta mono">540 KB</div><div class="cell-meta">Jun 7</div>
-              <span class="kebab"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>
+              <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <div class="name-cell"><svg class="ficon" style="color:#a855f7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9" r="1.8"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><div class="name-txt"><b>volcano_plot.png</b></div></div>
+              <div class="cell"><span class="tag out">output</span></div><div class="cell mono">540 KB</div><div class="cell">Jun 7</div>
+              <div class="actions"><button class="fileAction" title="Preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="fileAction" title="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
             </div>
           </div>
         </div>
 
-        <!-- conversation 2 (collapsed) -->
         <div class="conv">
           <div class="conv-head">
             <svg class="conv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg>
             <div class="conv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-            <div class="conv-meta"><b>Single-cell clustering — PBMC 3k</b><span>Last active Jun 4, 2026 · 9 files</span></div>
-            <div class="conv-badges">
-              <span class="pill in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>2 in</span>
-              <span class="pill out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12l7 7 7-7"/></svg>7 out</span>
-            </div>
+            <div class="conv-meta"><b>Single-cell clustering — PBMC 3k</b><span>Last active Jun 4 · 9 files</span></div>
+            <div class="conv-badges"><span class="pill in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>2 in</span><span class="pill out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12l7 7 7-7"/></svg>7 out</span></div>
           </div>
           <div class="conv-body">
             <div class="row" data-sel>
-              <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-              <div class="name-cell"><div class="ficon img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9" r="1.8"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg></div><div class="name-txt"><b>umap_clusters.png</b><span class="tag out">output</span></div></div>
-              <div class="cell-meta">PNG</div><div class="cell-meta mono">720 KB</div><div class="cell-meta">Jun 4</div>
-              <span class="kebab"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>
+              <span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <div class="name-cell"><svg class="ficon" style="color:#a855f7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9" r="1.8"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><div class="name-txt"><b>umap_clusters.png</b></div></div>
+              <div class="cell"><span class="tag out">output</span></div><div class="cell mono">720 KB</div><div class="cell">Jun 4</div>
+              <div class="actions"><button class="fileAction" title="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
             </div>
           </div>
         </div>
 
-        <!-- conversation 3 (collapsed) -->
         <div class="conv">
           <div class="conv-head">
             <svg class="conv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg>
             <div class="conv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-            <div class="conv-meta"><b>Variant calling — exome trio</b><span>Last active May 29, 2026 · 22 files</span></div>
-            <div class="conv-badges">
-              <span class="pill in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>6 in</span>
-              <span class="pill out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12l7 7 7-7"/></svg>16 out</span>
-            </div>
+            <div class="conv-meta"><b>Variant calling — exome trio</b><span>Last active May 29 · 22 files</span></div>
+            <div class="conv-badges"><span class="pill in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>6 in</span><span class="pill out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12l7 7 7-7"/></svg>16 out</span></div>
           </div>
           <div class="conv-body"></div>
         </div>
 
-        <div class="hint">
-          <b>Concept:</b> each conversation is a collapsible folder — its inputs &amp; outputs stay <b>mounted under it</b>, collapsed by default so the page never clutters even when files outnumber conversations. Mirrors how files are already tied to a conversation. &nbsp;·&nbsp; <b>My Files</b> stays a separate flat hierarchy (Maya's current scope).
-        </div>
+        <div class="hint"><b>Concept:</b> each conversation is a collapsible folder — its inputs &amp; outputs stay <b>mounted under it</b>, collapsed by default so the page never clutters even when files outnumber conversations. Mirrors how files are already tied to a conversation. &nbsp;·&nbsp; <b>My Files</b> stays a separate flat hierarchy.</div>
       </section>
     </div>
   </main>
 </div>
 
-<!-- ============ STICKY BULK ACTION BAR ============ -->
+<!-- ===== STICKY BULK ACTION BAR ===== -->
 <div class="actionbar" id="actionbar">
   <div class="ab-count"><span class="num" id="abNum">0</span> selected</div>
-  <div class="ab-divider"></div>
+  <div class="ab-div"></div>
   <button class="ab-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download</button>
   <button class="ab-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l2-3h6l2 3h8v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>Move</button>
   <button class="ab-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share</button>
@@ -402,45 +357,27 @@
 </div>
 
 <script>
-  // tab switching
-  document.querySelectorAll('.tab').forEach(t => {
-    t.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-      document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
-      t.classList.add('active');
-      document.getElementById('view-' + t.dataset.view).classList.add('active');
-    });
+  document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('view-' + t.dataset.view).classList.add('active');
+  }));
+  document.querySelectorAll('.conv-head').forEach(h => h.addEventListener('click', () => h.parentElement.classList.toggle('open')));
+
+  const bar = document.getElementById('actionbar'), num = document.getElementById('abNum');
+  function refresh() { const n = document.querySelectorAll('.row.selected').length; num.textContent = n; bar.classList.toggle('show', n > 0); }
+  document.querySelectorAll('.row[data-sel]').forEach(r => r.addEventListener('click', e => {
+    if (e.target.closest('.actions')) return;
+    r.classList.toggle('selected'); refresh();
+  }));
+  document.getElementById('abClose').addEventListener('click', () => { document.querySelectorAll('.row.selected').forEach(r => r.classList.remove('selected')); refresh(); });
+  document.getElementById('themeBtn').addEventListener('click', () => {
+    const h = document.documentElement; h.dataset.theme = h.dataset.theme === 'dark' ? 'light' : 'dark';
   });
 
-  // collapsible conversations
-  document.querySelectorAll('.conv-head').forEach(h => {
-    h.addEventListener('click', () => h.parentElement.classList.toggle('open'));
-  });
-
-  // row selection + sticky bar
-  const bar = document.getElementById('actionbar');
-  const num = document.getElementById('abNum');
-  function refresh() {
-    const n = document.querySelectorAll('.row.selected').length;
-    num.textContent = n;
-    bar.classList.toggle('show', n > 0);
-  }
-  document.querySelectorAll('.row[data-sel]').forEach(r => {
-    r.addEventListener('click', e => {
-      if (e.target.closest('.kebab')) return;
-      r.classList.toggle('selected');
-      refresh();
-    });
-  });
-  document.getElementById('abClose').addEventListener('click', () => {
-    document.querySelectorAll('.row.selected').forEach(r => r.classList.remove('selected'));
-    refresh();
-  });
-
-  // demo: pre-select two rows so the bar is visible on load
   const pre = document.querySelectorAll('#view-myfiles .row[data-sel]');
-  pre[2].classList.add('selected'); pre[3].classList.add('selected');
-  refresh();
+  pre[2].classList.add('selected'); pre[3].classList.add('selected'); refresh();
 </script>
 </body>
 </html>
