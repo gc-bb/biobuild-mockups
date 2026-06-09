@@ -8,21 +8,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-  /* ===== BioBuild design tokens (from src/styles/design-tokens.css) ===== */
   :root {
-    --color-blue-400:#5395ff; --color-blue-500:#0062fd; --color-blue-600:#0052d4; --color-blue-700:#1374ff;
-    --color-cyan-400:#4eeae3; --color-cyan-500:#01e4db; --color-cyan-600:#01c4bc;
-    --color-navy-500:#101b2d; --color-navy-700:#060d17; --color-navy-800:#1a1d29; --color-navy-900:#00060f;
+    --color-blue-400:#5395ff; --color-blue-500:#0062fd; --color-blue-600:#0052d4;
+    --color-cyan-500:#01e4db; --color-navy-500:#101b2d; --color-navy-800:#1a1d29; --color-navy-900:#00060f;
     --font-primary:'Inter',sans-serif; --font-mono:'IBM Plex Mono',monospace;
-    --spacing-xs:4px; --spacing-sm:8px; --spacing-md:12px; --spacing-lg:16px; --spacing-xl:20px; --spacing-2xl:24px;
-    --radius-sm:4px; --radius-md:8px; --radius-lg:10px; --radius-xl:16px; --radius-2xl:20px; --radius-full:9999px;
-    --text-xs:12px; --text-sm:14px; --text-base:16px; --text-lg:18px; --text-xl:23.724px;
+    --spacing-md:12px; --spacing-lg:16px; --spacing-2xl:24px;
+    --radius-sm:4px; --radius-md:8px; --radius-lg:10px; --radius-xl:16px; --radius-full:9999px;
+    --text-xs:12px; --text-sm:14px; --text-lg:18px; --text-xl:23.724px;
     --tracking-tight:-0.1504px; --transition-base:200ms;
     --color-gradient-primary:linear-gradient(100.17deg,var(--color-blue-500) 0%,var(--color-cyan-500) 119.5%);
   }
   [data-theme="dark"] {
     --bg-gradient:linear-gradient(12.86deg,var(--color-navy-900) 0%,var(--color-navy-500) 100%);
-    --bg-secondary:var(--color-navy-500); --bg-tertiary:var(--color-navy-800);
+    --bg-tertiary:var(--color-navy-800);
     --text-primary:#e4e4e4; --text-secondary:rgba(255,255,255,.77); --text-tertiary:rgba(255,255,255,.53); --text-muted:rgba(255,255,255,.41);
     --text-placeholder:#9f9fa9;
     --border-primary:rgba(255,255,255,.05); --border-secondary:rgba(255,255,255,.08); --border-light:rgba(255,255,255,.12);
@@ -30,12 +28,11 @@
     --card-bg:rgba(13,17,23,.4); --card-border:rgba(255,255,255,.12);
     --sel-bg:rgba(0,98,253,.12); --sel-border:rgba(0,98,253,.4);
     --menu-bg:rgba(26,29,41,.96); --bar-bg:rgba(20,28,44,.92); --bar-border:rgba(255,255,255,.1);
-    --shadow-md:0px 4px 34px 0px rgba(0,0,0,.25); --shadow-lg:0px 4px 84px 0px rgba(0,98,253,.12);
-    --shadow-button:0px 0px 40px -12px rgba(83,149,255,.18),inset 0px .5px 0px 0px rgba(255,255,255,.08);
+    --shadow-md:0px 4px 34px 0px rgba(0,0,0,.25);
   }
   [data-theme="light"] {
     --bg-gradient:linear-gradient(180deg,#f0f6ff 0%,#e0edff 100%);
-    --bg-secondary:#ffffff; --bg-tertiary:rgba(255,255,255,.6);
+    --bg-tertiary:rgba(255,255,255,.6);
     --text-primary:#002560; --text-secondary:#70727c; --text-tertiary:#7b7f8b; --text-muted:#023671;
     --text-placeholder:#7b7f8b;
     --border-primary:rgba(0,98,253,.15); --border-secondary:rgba(0,98,253,.11); --border-light:rgba(0,98,253,.1);
@@ -43,10 +40,8 @@
     --card-bg:rgba(255,255,255,.7); --card-border:rgba(0,98,253,.12);
     --sel-bg:rgba(0,98,253,.08); --sel-border:rgba(0,98,253,.35);
     --menu-bg:rgba(255,255,255,.98); --bar-bg:rgba(255,255,255,.96); --bar-border:rgba(0,98,253,.15);
-    --shadow-md:0px 4px 34px 0px rgba(0,98,253,.13); --shadow-lg:0px 4px 24px 0px rgba(0,98,253,.08);
-    --shadow-button:0px 0px 20px -8px rgba(83,149,255,.12),inset 0px .5px 0px 0px rgba(0,0,0,.05);
+    --shadow-md:0px 4px 34px 0px rgba(0,98,253,.13);
   }
-
   * { margin:0; padding:0; box-sizing:border-box; }
   html,body { height:100vh; overflow:hidden; }
   body { font-family:var(--font-primary); background:var(--bg-gradient); color:var(--text-primary); -webkit-font-smoothing:antialiased; letter-spacing:var(--tracking-tight); }
@@ -58,12 +53,10 @@
   [data-tip]:hover::after { content:attr(data-tip); position:absolute; bottom:calc(100% + 7px); left:50%; transform:translateX(-50%); background:var(--bg-tertiary); color:var(--text-primary); font-size:11px; font-weight:500; padding:4px 8px; border-radius:6px; white-space:nowrap; border:1px solid var(--border-light); box-shadow:var(--shadow-md); pointer-events:none; z-index:60; }
 
   .app { display:grid; grid-template-columns:256px 1fr; height:100vh; }
-
-  /* ===== sidebar ===== */
   .sidebar { display:flex; flex-direction:column; background-image:var(--bg-gradient); border-right:1px solid var(--border-primary); }
   .logoBar { display:flex; align-items:center; gap:8px; height:72px; padding:0 var(--spacing-2xl); }
   .logoText { font-family:var(--font-mono); font-weight:600; font-size:var(--text-xl); color:var(--text-primary); }
-  .nav { flex:1; display:flex; flex-direction:column; padding:var(--spacing-sm) var(--spacing-md) var(--spacing-lg); overflow-y:auto; }
+  .nav { flex:1; display:flex; flex-direction:column; padding:8px var(--spacing-md) var(--spacing-lg); overflow-y:auto; }
   .navItem { position:relative; display:flex; align-items:center; gap:var(--spacing-md); height:40px; padding:0 var(--spacing-md) 0 var(--spacing-lg); border-radius:8px; color:var(--text-secondary); font-weight:500; font-size:var(--text-sm); cursor:pointer; transition:all var(--transition-base); }
   .navItem svg { width:18px; height:18px; stroke-width:2; transition:color var(--transition-base); }
   .navItem:hover { color:var(--text-primary); background:var(--over-med); }
@@ -72,7 +65,7 @@
   .navItem.active::before { content:''; position:absolute; left:0; top:8px; bottom:8px; width:3px; border-radius:0 3px 3px 0; background:var(--color-blue-500); }
   .navLabel { padding:14px 12px 6px; font-size:11px; font-weight:600; color:var(--color-blue-500); letter-spacing:.05em; text-transform:uppercase; }
   .navSub .navItem { font-size:13px; height:36px; }
-  .spacer { flex:1; }
+  .navfill { flex:1; }
   .profile { border-top:1px solid var(--border-light); padding:14px var(--spacing-lg); display:flex; align-items:center; gap:var(--spacing-md); }
   .avatar { position:relative; width:36px; height:36px; border-radius:var(--radius-full); background:linear-gradient(to bottom right,#fb923c,#ec4899); display:grid; place-items:center; color:#fff; font-weight:600; font-size:13px; }
   .avatar .dot { position:absolute; bottom:0; right:0; width:10px; height:10px; border-radius:var(--radius-full); background:#22c55e; border:2px solid var(--color-navy-500); }
@@ -80,7 +73,6 @@
   .profile .pname { font-weight:600; font-size:var(--text-sm); color:var(--text-primary); line-height:18px; }
   .profile .prole { font-weight:400; font-size:11px; color:var(--text-tertiary); }
 
-  /* ===== main ===== */
   .main { display:flex; flex-direction:column; min-width:0; height:100vh; }
   .topbar { display:flex; align-items:center; gap:var(--spacing-lg); height:72px; padding:0 var(--spacing-2xl); border-bottom:1px solid var(--border-primary); }
   .ptitle { font-size:var(--text-lg); font-weight:600; }
@@ -97,18 +89,15 @@
   .btn-secondary { display:inline-flex; align-items:center; gap:7px; cursor:pointer; border:1px solid var(--border-light); background:var(--over-soft); color:var(--text-primary); padding:9px 14px; border-radius:var(--radius-lg); font-size:var(--text-sm); font-weight:600; transition:all var(--transition-base); }
   .btn-secondary:hover { border-color:var(--color-blue-500); color:var(--color-blue-400); }
   .btn-secondary svg { width:15px; height:15px; }
-  .btn-primary { display:inline-flex; align-items:center; gap:8px; cursor:pointer; border:none; background:var(--color-gradient-primary); color:#fff; padding:9px 16px; border-radius:var(--radius-lg); font-size:var(--text-sm); font-weight:600; box-shadow:var(--shadow-button); transition:filter var(--transition-base); }
+  .btn-primary { display:inline-flex; align-items:center; gap:8px; cursor:pointer; border:none; background:var(--color-gradient-primary); color:#fff; padding:9px 16px; border-radius:var(--radius-lg); font-size:var(--text-sm); font-weight:600; transition:filter var(--transition-base); }
   .btn-primary:hover { filter:brightness(1.08); }
   .btn-primary svg { width:16px; height:16px; }
-
-  /* NEW dropdown */
   .dropdown { position:absolute; top:calc(100% + 6px); right:0; min-width:170px; background:var(--menu-bg); border:1px solid var(--border-light); border-radius:var(--radius-md); box-shadow:var(--shadow-md); backdrop-filter:blur(16px); padding:5px; z-index:70; display:none; }
   .dropdown.show { display:block; }
   .dropdown button { display:flex; align-items:center; gap:10px; width:100%; background:none; border:none; color:var(--text-secondary); font-size:13px; font-weight:500; padding:8px 10px; border-radius:var(--radius-sm); cursor:pointer; text-align:left; }
   .dropdown button:hover { background:var(--over-strong); color:var(--text-primary); }
   .dropdown button svg { width:15px; height:15px; }
 
-  /* tabs */
   .tabs { display:flex; gap:4px; padding:14px var(--spacing-2xl) 0; border-bottom:1px solid var(--border-primary); }
   .tab { display:flex; align-items:center; gap:8px; padding:10px 14px; font-size:var(--text-sm); font-weight:600; color:var(--text-secondary); cursor:pointer; border-bottom:2.5px solid transparent; margin-bottom:-1px; transition:color var(--transition-base); }
   .tab svg { width:16px; height:16px; }
@@ -117,14 +106,12 @@
   .tab.active { color:var(--color-blue-500); border-bottom-color:var(--color-blue-500); }
   .tab.active .count { background:rgba(0,98,253,.15); color:var(--color-blue-400); }
 
-  /* content */
   .content { flex:1; overflow-y:auto; padding:0 var(--spacing-2xl) 60px; position:relative; }
   .view { display:none; } .view.active { display:block; }
   .crumbs { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--text-tertiary); padding:20px 0 14px; }
   .crumbs b { color:var(--text-primary); font-weight:600; }
   .crumbs svg { width:14px; height:14px; }
 
-  /* === sticky selection bar (Maya 3.1) === */
   .selbar { position:sticky; top:0; z-index:20; display:none; align-items:center; gap:10px; margin:0 0 10px; padding:10px 12px 10px 14px; background:var(--bar-bg); border:1px solid var(--bar-border); border-radius:var(--radius-lg); box-shadow:var(--shadow-md); backdrop-filter:blur(16px); }
   .selbar.show { display:flex; }
   .selbar .clearX { display:grid; place-items:center; width:26px; height:26px; border:none; background:var(--over-med); color:var(--text-secondary); border-radius:var(--radius-sm); cursor:pointer; }
@@ -136,8 +123,6 @@
   .sb-act:hover { color:var(--text-primary); background:var(--over-strong); }
   .sb-act.danger:hover { color:#ef4444; background:rgba(239,68,68,.15); }
   .sb-act svg { width:16px; height:16px; }
-
-  /* delete confirm popover */
   .confirm { position:absolute; top:calc(100% + 8px); right:0; background:var(--menu-bg); border:1px solid var(--border-light); border-radius:var(--radius-md); box-shadow:var(--shadow-md); padding:12px 14px; z-index:80; display:none; backdrop-filter:blur(16px); white-space:nowrap; }
   .confirm.show { display:block; }
   .confirm p { font-size:13px; font-weight:500; margin-bottom:10px; }
@@ -146,14 +131,11 @@
   .confirm .yes { background:#22c55e; color:#03240f; } .confirm .yes:hover { filter:brightness(1.08); }
   .confirm .no { background:#ef4444; color:#fff; } .confirm .no:hover { filter:brightness(1.08); }
 
-  /* list */
-  .list-head { display:grid; grid-template-columns:34px 1fr 110px 96px 96px 96px; gap:12px; align-items:center; padding:0 12px 9px; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted); font-weight:600; border-bottom:1px solid var(--border-primary); }
-
+  .list-head { display:grid; grid-template-columns:34px 1fr 110px 96px 96px 96px; gap:12px; align-items:center; padding:0 12px 9px; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted); font-weight:600; border-bottom:1px solid var(--border-primary); position:sticky; top:0; background:transparent; }
   .row { display:grid; grid-template-columns:34px 1fr 110px 96px 96px 96px; gap:12px; align-items:center; padding:9px 12px; border-radius:var(--radius-md); cursor:pointer; border:1px solid transparent; transition:background .12s,border-color .12s; user-select:none; }
   .row:hover { background:var(--over-soft); }
   .row.selected { background:var(--sel-bg); border-color:var(--sel-border); }
-  .row.child { margin-left:26px; }
-  /* checkbox (tri-state) */
+  .row.child .name-cell { padding-left:26px; }
   .ck { width:18px; height:18px; border-radius:5px; border:2px solid var(--border-light); background:transparent; display:grid; place-items:center; transition:all .12s; flex-shrink:0; }
   .ck .tick,.ck .dash { opacity:0; color:#fff; }
   .ck .tick { width:11px; height:11px; } .ck .dash { width:10px; height:2px; background:#fff; border-radius:2px; }
@@ -163,26 +145,24 @@
   .name-cell { display:flex; align-items:center; gap:9px; min-width:0; }
   .chev { width:15px; height:15px; color:var(--text-tertiary); flex-shrink:0; transition:transform .18s; cursor:pointer; }
   .chev.ph { visibility:hidden; cursor:default; }
-  .folder.open > .row .chev { transform:rotate(90deg); }
+  .folder.open > .row .chev:not(.ph) { transform:rotate(90deg); }
   .ficon { width:17px; height:17px; flex-shrink:0; }
+  .name-txt { min-width:0; display:flex; align-items:center; }
   .name-txt b { font-size:var(--text-sm); font-weight:500; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .ext-badge { font-family:var(--font-mono); font-size:10px; font-weight:500; text-transform:uppercase; background:var(--over-strong); color:var(--text-tertiary); padding:1px 6px; border-radius:var(--radius-sm); margin-left:8px; }
+  .ext-badge { font-family:var(--font-mono); font-size:10px; font-weight:500; text-transform:uppercase; background:var(--over-strong); color:var(--text-tertiary); padding:1px 6px; border-radius:var(--radius-sm); margin-left:8px; flex-shrink:0; }
   .cell { font-size:13px; color:var(--text-tertiary); }
   .cell.mono { font-family:var(--font-mono); font-size:12px; }
   .tag { font-size:10px; font-weight:600; padding:2px 8px; border-radius:20px; }
   .tag.in { background:rgba(0,98,253,.14); color:var(--color-blue-400); }
   .tag.out { background:rgba(1,228,219,.14); color:var(--color-cyan-500); }
-  /* per-row hover actions (Maya: File Icons on hover) */
   .actions { display:flex; gap:4px; justify-content:flex-end; opacity:0; transition:opacity .12s; }
   .row:hover .actions { opacity:1; }
   .fileAction { display:grid; place-items:center; width:24px; height:24px; border:none; background:var(--over-med); color:var(--text-tertiary); border-radius:var(--radius-sm); cursor:pointer; transition:all .12s; }
   .fileAction:hover { color:var(--text-primary); background:var(--over-strong); }
-  .fileAction.danger:hover { color:#ef4444; background:rgba(239,68,68,.15); }
   .fileAction svg { width:13px; height:13px; }
   .folder-children { display:none; }
   .folder.open > .folder-children { display:block; }
 
-  /* context menu (Maya 2.1 — double / right click) */
   .ctxmenu { position:fixed; min-width:158px; background:var(--menu-bg); border:1px solid var(--border-light); border-radius:var(--radius-md); box-shadow:var(--shadow-md); backdrop-filter:blur(16px); padding:5px; z-index:90; display:none; }
   .ctxmenu.show { display:block; }
   .ctxmenu button { display:flex; align-items:center; gap:10px; width:100%; background:none; border:none; color:var(--text-secondary); font-size:13px; font-weight:500; padding:8px 10px; border-radius:var(--radius-sm); cursor:pointer; text-align:left; }
@@ -191,7 +171,6 @@
   .ctxmenu button svg { width:14px; height:14px; }
   .ctxmenu .sep { height:1px; background:var(--border-primary); margin:4px 6px; }
 
-  /* conversation groups */
   .conv { background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius-xl); margin-bottom:12px; overflow:hidden; backdrop-filter:blur(12px); transition:border-color .2s; }
   .conv:hover { border-color:rgba(0,98,253,.3); }
   .conv-head { display:flex; align-items:center; gap:13px; padding:13px 16px; cursor:pointer; }
@@ -207,7 +186,7 @@
   .pill svg { width:12px; height:12px; }
   .pill.in { background:rgba(0,98,253,.14); color:var(--color-blue-400); }
   .pill.out { background:rgba(1,228,219,.14); color:var(--color-cyan-500); }
-  .conv-body { display:none; padding:4px 12px 10px; border-top:1px solid var(--border-primary); }
+  .conv-body { display:none; padding:4px 12px 10px; border-top:1px solid var(--border-primary); max-height:340px; overflow-y:auto; }
   .conv.open .conv-body { display:block; }
 
   .hint { margin:18px auto 0; max-width:680px; text-align:center; font-size:12.5px; color:var(--text-tertiary); background:var(--card-bg); border:1px dashed var(--border-light); border-radius:var(--radius-xl); padding:13px 18px; line-height:1.65; }
@@ -216,7 +195,6 @@
 </head>
 <body>
 <div class="app">
-  <!-- ===== SIDEBAR ===== -->
   <aside class="sidebar">
     <div class="logoBar">
       <svg width="22" height="30" viewBox="0 0 24 24" fill="none" stroke="url(#g)" stroke-width="2.4" style="transform:rotate(22.4deg)"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0062fd"/><stop offset="1" stop-color="#01e4db"/></linearGradient></defs><path d="M5 3c7 5 7 13 0 18M19 3c-7 5-7 13 0 18M5 12h14" stroke-linecap="round"/></svg>
@@ -231,12 +209,11 @@
         <div class="navItem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Conversation Files</div>
         <div class="navItem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>Datasets</div>
       </div>
-      <div class="spacer"></div>
+      <div class="navfill"></div>
     </nav>
     <div class="profile"><div class="avatar">LC<span class="dot"></span></div><div><div class="pname">Leon Chuang</div><div class="prole">Pro workspace</div></div></div>
   </aside>
 
-  <!-- ===== MAIN ===== -->
   <main class="main">
     <div class="topbar">
       <div class="ptitle">Files<small>Manage uploads &amp; analysis outputs in one place</small></div>
@@ -255,12 +232,11 @@
     </div>
 
     <div class="tabs">
-      <div class="tab active" data-view="myfiles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l2-3h14l2 3M3 7h18v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>My Files <span class="count">24</span></div>
-      <div class="tab" data-view="conv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Conversation Files <span class="count">38</span></div>
+      <div class="tab active" data-view="myfiles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l2-3h14l2 3M3 7h18v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>My Files <span class="count" id="mfCount">0</span></div>
+      <div class="tab" data-view="conv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Conversation Files <span class="count" id="cfCount">0</span></div>
     </div>
 
     <div class="content" id="content">
-      <!-- ===== STICKY SELECTION BAR (Maya 3.1) ===== -->
       <div class="selbar" id="selbar">
         <button class="clearX" id="selClear" data-tip="Clear selection"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
         <span class="label"><span class="mono" id="selCount">0</span> Files Selected</span>
@@ -272,122 +248,22 @@
         </div>
       </div>
 
-      <!-- ===== MY FILES (tree: folders + files, tri-state) ===== -->
       <section class="view active" id="view-myfiles">
         <div class="crumbs"><b>My Files</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>All</div>
         <div class="list-head"><span></span><span>Name</span><span>Type</span><span>Size</span><span>Modified</span><span></span></div>
-
-        <!-- folder A -->
-        <div class="folder" data-folder>
-          <div class="row folder-row" data-row>
-            <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-            <div class="name-cell"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg><svg class="ficon" style="color:#f59e0b" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l2-3h6l2 3h8v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg><div class="name-txt"><b>RNA-seq raw reads</b></div></div>
-            <div class="cell">Folder · 2</div><div class="cell mono">3.4 GB</div><div class="cell">Jun 6</div><div class="actions"></div>
-          </div>
-          <div class="folder-children">
-            <div class="row child file" data-row data-file>
-              <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#0ea5e9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>treated_R1.fastq.gz<span class="ext-badge">fastq</span></b></div></div>
-              <div class="cell">FASTQ</div><div class="cell mono">1.6 GB</div><div class="cell">Jun 6</div>
-              <div class="actions"><button class="fileAction" data-tip="Mention"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></button><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
-            </div>
-            <div class="row child file" data-row data-file>
-              <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#0ea5e9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>treated_R2.fastq.gz<span class="ext-badge">fastq</span></b></div></div>
-              <div class="cell">FASTQ</div><div class="cell mono">1.8 GB</div><div class="cell">Jun 6</div>
-              <div class="actions"><button class="fileAction" data-tip="Mention"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></button><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- folder B -->
-        <div class="folder" data-folder>
-          <div class="row folder-row" data-row>
-            <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-            <div class="name-cell"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg><svg class="ficon" style="color:#f59e0b" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l2-3h6l2 3h8v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg><div class="name-txt"><b>Reference genomes</b></div></div>
-            <div class="cell">Folder · 2</div><div class="cell mono">920 MB</div><div class="cell">Jun 2</div><div class="actions"></div>
-          </div>
-          <div class="folder-children">
-            <div class="row child file" data-row data-file>
-              <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#0ea5e9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>GRCh38.fa<span class="ext-badge">fa</span></b></div></div>
-              <div class="cell">FASTA</div><div class="cell mono">820 MB</div><div class="cell">Jun 2</div>
-              <div class="actions"><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
-            </div>
-            <div class="row child file" data-row data-file>
-              <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#14b8a6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>GRCh38.gtf<span class="ext-badge">gtf</span></b></div></div>
-              <div class="cell">GTF</div><div class="cell mono">100 MB</div><div class="cell">Jun 2</div>
-              <div class="actions"><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- loose files -->
-        <div class="row file" data-row data-file>
-          <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-          <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#22c55e" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>sample_metadata.csv<span class="ext-badge">csv</span></b></div></div>
-          <div class="cell">CSV</div><div class="cell mono">42 KB</div><div class="cell">May 30</div>
-          <div class="actions"><button class="fileAction" data-tip="Mention"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></button><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
-        </div>
-        <div class="row file" data-row data-file>
-          <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-          <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#94a3b8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>pbmc_3k.h5ad<span class="ext-badge">h5ad</span></b></div></div>
-          <div class="cell">AnnData</div><div class="cell mono">228 MB</div><div class="cell">May 28</div>
-          <div class="actions"><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
-        </div>
-
+        <div id="mfTree"></div>
         <div class="hint"><b>Interaction (per Maya's spec — combines Iteration 2.1 + 3.1):</b> select ≥1 file → the bar sticks to the top while you scroll. Click a folder to select all files inside (partial = <b>–</b> indeterminate). <span class="kbd">double-click</span> or <span class="kbd">right-click</span> a row for the pop-up menu. Delete asks to confirm.</div>
       </section>
 
-      <!-- ===== CONVERSATION FILES (mounted per conversation) ===== -->
       <section class="view" id="view-conv">
         <div class="crumbs"><b>Conversation Files</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>Grouped by conversation</div>
-        <div class="conv open">
-          <div class="conv-head"><svg class="conv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg><div class="conv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="conv-meta"><b>Differential expression — treated vs control</b><span>Last active Jun 7 · 7 files</span></div><div class="conv-badges"><span class="pill in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>4 in</span><span class="pill out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12l7 7 7-7"/></svg>3 out</span></div></div>
-          <div class="conv-body">
-            <div class="row file" data-row data-file>
-              <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#0ea5e9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>treated_R1.fastq.gz</b></div></div>
-              <div class="cell"><span class="tag in">input</span></div><div class="cell mono">1.6 GB</div><div class="cell">Jun 7</div>
-              <div class="actions"><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
-            </div>
-            <div class="row file" data-row data-file>
-              <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#22c55e" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg><div class="name-txt"><b>deg_results.csv</b></div></div>
-              <div class="cell"><span class="tag out">output</span></div><div class="cell mono">310 KB</div><div class="cell">Jun 7</div>
-              <div class="actions"><button class="fileAction" data-tip="Preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
-            </div>
-            <div class="row file" data-row data-file>
-              <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#a855f7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9" r="1.8"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><div class="name-txt"><b>volcano_plot.png</b></div></div>
-              <div class="cell"><span class="tag out">output</span></div><div class="cell mono">540 KB</div><div class="cell">Jun 7</div>
-              <div class="actions"><button class="fileAction" data-tip="Preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
-            </div>
-          </div>
-        </div>
-        <div class="conv">
-          <div class="conv-head"><svg class="conv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg><div class="conv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="conv-meta"><b>Single-cell clustering — PBMC 3k</b><span>Last active Jun 4 · 9 files</span></div><div class="conv-badges"><span class="pill in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>2 in</span><span class="pill out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12l7 7 7-7"/></svg>7 out</span></div></div>
-          <div class="conv-body">
-            <div class="row file" data-row data-file>
-              <span class="ck"><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span></span>
-              <div class="name-cell"><span class="chev ph"></span><svg class="ficon" style="color:#a855f7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9" r="1.8"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><div class="name-txt"><b>umap_clusters.png</b></div></div>
-              <div class="cell"><span class="tag out">output</span></div><div class="cell mono">720 KB</div><div class="cell">Jun 4</div>
-              <div class="actions"><button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button></div>
-            </div>
-          </div>
-        </div>
-        <div class="conv">
-          <div class="conv-head"><svg class="conv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg><div class="conv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="conv-meta"><b>Variant calling — exome trio</b><span>Last active May 29 · 22 files</span></div><div class="conv-badges"><span class="pill in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>6 in</span><span class="pill out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12l7 7 7-7"/></svg>16 out</span></div></div>
-          <div class="conv-body"></div>
-        </div>
+        <div id="cfList"></div>
         <div class="hint"><b>Per the thread:</b> a single conversation can produce hundreds of outputs (KC), so each conversation is a collapsible folder with its inputs/outputs <b>mounted under it</b> (Geremy), collapsed by default. <b>My Files</b> stays a separate flat hierarchy. Same selection + pop-up interactions apply here.</div>
       </section>
     </div>
   </main>
 </div>
 
-<!-- ===== CONTEXT MENU (Maya 2.1) ===== -->
 <div class="ctxmenu" id="ctxmenu">
   <button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>Mention</button>
   <button><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>Preview</button>
@@ -400,92 +276,210 @@
 <script>
   const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 
-  // tabs
+  /* ---------- icon shapes + classification ---------- */
+  const SHAPES = {
+    doc:'<path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/>',
+    sheet:'<path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M8 13h2M8 17h2M14 13h2M14 17h2"/>',
+    code:'<path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M9.6 12.5l-1.3 1.8 1.3 1.8M14.4 12.5l1.3 1.8-1.3 1.8"/>',
+    img:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="9" r="1.8"/><path d="M4 17l5-5 4 4 3-3 4 4"/>',
+    archive:'<path d="M14 3v5h5M7 3h8l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M12 11.5v4M10.6 12.8h2.8"/>'
+  };
+  const TYPEMAP = { fastq:'FASTQ',fq:'FASTQ',fa:'FASTA',fasta:'FASTA',fna:'FASTA',gtf:'GTF',gff:'GFF',gff3:'GFF',bed:'BED',vcf:'VCF',bam:'BAM',bai:'BAM idx',sam:'SAM',csv:'CSV',tsv:'TSV',xlsx:'Excel',json:'JSON',jsonl:'JSONL',h5ad:'AnnData',h5:'HDF5',png:'PNG',jpg:'Image',txt:'Text',md:'Markdown',log:'Log',dict:'Dict',fai:'Index',amb:'Index',ann:'Index',bwt:'Index',pac:'Index',sa:'Index',tab:'Table',py:'Python',r:'R',ipynb:'Notebook',html:'HTML',pdf:'PDF' };
+  function classify(name){
+    const parts = name.split('.'); let prim = parts.length>1 ? parts[parts.length-1].toLowerCase() : '';
+    const comp = ['gz','bz2','zip','tar'];
+    if(comp.includes(prim) && parts.length>2) prim = parts[parts.length-2].toLowerCase();
+    let color='#94a3b8', shape='doc';
+    if(['png','jpg','jpeg','gif','svg','webp'].includes(prim)) { color='#a855f7'; shape='img'; }
+    else if(['csv','tsv','xls','xlsx'].includes(prim)) { color='#22c55e'; shape='sheet'; }
+    else if(['json','jsonl'].includes(prim)) { color='#eab308'; shape='code'; }
+    else if(['py','r','ipynb','sh','sql'].includes(prim)) { color='#3b82f6'; shape='code'; }
+    else if(['md','txt','log'].includes(prim)) { color='#6366f1'; shape='doc'; }
+    else if(['fastq','fq','fa','fasta','fna','faa'].includes(prim)) { color='#0ea5e9'; shape='doc'; }
+    else if(['vcf','bed','gff','gff3','gtf','sam','bam','bai'].includes(prim)) { color='#14b8a6'; shape='doc'; }
+    else if(['gz','tar','zip'].includes(prim)) { color='#f59e0b'; shape='archive'; }
+    else if(prim==='pdf') { color='#ef4444'; shape='doc'; }
+    else if(['h5ad','h5'].includes(prim)) { color='#f59e0b'; shape='archive'; }
+    return { prim, color, shape, type: TYPEMAP[prim] || (prim?prim.toUpperCase():'File') };
+  }
+
+  const TICK = '<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg><span class="dash"></span>';
+  const DL = '<button class="fileAction" data-tip="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button>';
+  const MENTION = '<button class="fileAction" data-tip="Mention"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></button>';
+  const PREVIEW = '<button class="fileAction" data-tip="Preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button>';
+  function ic(c){ return `<svg class="ficon" style="color:${c.color}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${SHAPES[c.shape]}</svg>`; }
+
+  function fileRow(f, child){
+    const c = classify(f.name);
+    const badge = f.name.includes('.') ? `<span class="ext-badge">${c.prim}</span>` : '';
+    const typeCell = f.tag ? `<span class="tag ${f.tag==='input'?'in':'out'}">${f.tag}</span>` : c.type;
+    const previewable = ['img','sheet'].includes(c.shape) || ['html','pdf','txt','md'].includes(c.prim);
+    const acts = (child===false?MENTION:'') + (previewable?PREVIEW:'') + DL;
+    return `<div class="row file${child?' child':''}" data-row data-file>
+      <span class="ck">${TICK}</span>
+      <div class="name-cell"><span class="chev ph"></span>${ic(c)}<div class="name-txt"><b>${f.name}${badge}</b></div></div>
+      <div class="cell">${typeCell}</div><div class="cell mono">${f.size}</div><div class="cell">${f.date}</div>
+      <div class="actions">${acts}</div></div>`;
+  }
+  function folderBlock(name, files, totalSize, date, open){
+    const kids = files.map(f => fileRow(f, true)).join('');
+    return `<div class="folder${open?' open':''}" data-folder>
+      <div class="row folder-row" data-row><span class="ck">${TICK}</span>
+        <div class="name-cell"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg><svg class="ficon" style="color:#f59e0b" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l2-3h6l2 3h8v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg><div class="name-txt"><b>${name}</b></div></div>
+        <div class="cell">Folder · ${files.length}</div><div class="cell mono">${totalSize}</div><div class="cell">${date}</div><div class="actions"></div></div>
+      <div class="folder-children">${kids}</div></div>`;
+  }
+
+  /* ---------- data ---------- */
+  const pad = n => String(n).padStart(2,'0');
+  const rnaFiles = [];
+  for(let i=1;i<=10;i++){
+    rnaFiles.push({name:`sample_${pad(i)}_R1.fastq.gz`, size:(1.4+i*0.03).toFixed(1)+' GB', date:'Jun 6'});
+    rnaFiles.push({name:`sample_${pad(i)}_R2.fastq.gz`, size:(1.5+i*0.03).toFixed(1)+' GB', date:'Jun 6'});
+  }
+  const refNames = ['GRCh38.primary.fa','GRCh38.primary.fa.fai','GRCh38.dict','GRCh38.annotation.gtf','GRCh38.annotation.gff3','GRCh38.exons.bed','GRCh38.primary.fa.amb','GRCh38.primary.fa.ann','GRCh38.primary.fa.bwt','GRCh38.primary.fa.pac','GRCh38.primary.fa.sa','star_SA','star_SAindex','star_Genome','chrName.txt','chrLength.txt','sjdbInfo.txt','exonInfo.tab','geneInfo.tab','transcriptInfo.tab'];
+  const refSizes = ['820 MB','12 KB','620 B','48 MB','52 MB','9.1 MB','2.1 MB','18 MB','810 MB','203 MB','405 MB','24 GB','1.5 GB','810 MB','2 KB','1 KB','14 MB','38 MB','22 MB','19 MB'];
+  const refFiles = refNames.map((n,i)=>({name:n, size:refSizes[i], date:'Jun 2'}));
+  const bamFiles = [];
+  for(let i=1;i<=10;i++){
+    bamFiles.push({name:`sample_${pad(i)}.sorted.bam`, size:(2.0+i*0.05).toFixed(1)+' GB', date:'Jun 4'});
+    bamFiles.push({name:`sample_${pad(i)}.sorted.bam.bai`, size:(2.1+i*0.02).toFixed(1)+' MB', date:'Jun 4'});
+  }
+  const looseFiles = [
+    {name:'sample_metadata.csv', size:'42 KB', date:'May 30'},
+    {name:'experiment_design.xlsx', size:'88 KB', date:'May 30'},
+    {name:'pbmc_3k.h5ad', size:'228 MB', date:'May 28'},
+    {name:'README.md', size:'4 KB', date:'May 28'},
+    {name:'analysis_notes.txt', size:'12 KB', date:'May 27'},
+  ];
+
+  $('#mfTree').innerHTML =
+    folderBlock('RNA-seq raw reads', rnaFiles, '32.1 GB', 'Jun 6', true) +
+    folderBlock('Reference genomes', refFiles, '28.4 GB', 'Jun 2', false) +
+    folderBlock('Alignments (BAM)', bamFiles, '22.8 GB', 'Jun 4', false) +
+    looseFiles.map(f => fileRow(f, false)).join('');
+
+  /* ---------- conversation data ---------- */
+  function convCard(title, when, files, open){
+    const ins = files.filter(f=>f.tag==='input').length, outs = files.filter(f=>f.tag==='output').length;
+    const body = files.map(f => fileRow(f, false)).join('');
+    return `<div class="conv${open?' open':''}">
+      <div class="conv-head"><svg class="conv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg>
+        <div class="conv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="conv-meta"><b>${title}</b><span>${when} · ${files.length} files</span></div>
+        <div class="conv-badges"><span class="pill in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>${ins} in</span><span class="pill out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12l7 7 7-7"/></svg>${outs} out</span></div>
+      </div>
+      <div class="conv-body">${body}</div></div>`;
+  }
+  const conv1 = [
+    {name:'treated_R1.fastq.gz',tag:'input',size:'1.6 GB',date:'Jun 7'},
+    {name:'treated_R2.fastq.gz',tag:'input',size:'1.8 GB',date:'Jun 7'},
+    {name:'control_R1.fastq.gz',tag:'input',size:'1.5 GB',date:'Jun 7'},
+    {name:'control_R2.fastq.gz',tag:'input',size:'1.7 GB',date:'Jun 7'},
+    {name:'deg_results.csv',tag:'output',size:'310 KB',date:'Jun 7'},
+    {name:'volcano_plot.png',tag:'output',size:'540 KB',date:'Jun 7'},
+    {name:'ma_plot.png',tag:'output',size:'480 KB',date:'Jun 7'},
+  ];
+  const conv2 = [
+    {name:'pbmc_3k.h5ad',tag:'input',size:'228 MB',date:'Jun 4'},
+    {name:'barcodes.tsv',tag:'input',size:'120 KB',date:'Jun 4'},
+    {name:'umap_clusters.png',tag:'output',size:'720 KB',date:'Jun 4'},
+    {name:'tsne_plot.png',tag:'output',size:'680 KB',date:'Jun 4'},
+    {name:'marker_genes.csv',tag:'output',size:'92 KB',date:'Jun 4'},
+    {name:'qc_violin.png',tag:'output',size:'410 KB',date:'Jun 4'},
+    {name:'cluster_summary.json',tag:'output',size:'18 KB',date:'Jun 4'},
+    {name:'expression_heatmap.png',tag:'output',size:'1.1 MB',date:'Jun 4'},
+    {name:'adata_processed.h5ad',tag:'output',size:'265 MB',date:'Jun 4'},
+  ];
+  const conv3 = [
+    {name:'NA12878.sorted.bam',tag:'input',size:'18 GB',date:'May 29'},
+    {name:'NA12878.sorted.bam.bai',tag:'input',size:'4.2 MB',date:'May 29'},
+    {name:'GRCh38.primary.fa',tag:'input',size:'820 MB',date:'May 29'},
+    {name:'GRCh38.primary.fa.fai',tag:'input',size:'12 KB',date:'May 29'},
+    {name:'dbsnp_151.vcf.gz',tag:'input',size:'1.6 GB',date:'May 29'},
+    {name:'target_intervals.bed',tag:'input',size:'2.4 MB',date:'May 29'},
+  ];
+  const outNames = ['raw_variants.vcf.gz','filtered_variants.vcf.gz','snps.vcf','indels.vcf','annotated.vcf.gz','variant_stats.txt','ti_tv_metrics.csv','depth_summary.csv','qual_distribution.png','vep_summary.txt','bqsr_recal.table','bqsr_plots.png','callable_regions.bed','sample_qc.json','gene_hits.csv','clinvar_matches.csv'];
+  const outSizes = ['540 MB','120 MB','42 MB','38 MB','210 MB','18 KB','24 KB','31 KB','380 KB','12 KB','8 MB','420 KB','3.1 MB','9 KB','64 KB','88 KB'];
+  outNames.forEach((n,i)=>conv3.push({name:n,tag:'output',size:outSizes[i],date:'May 29'}));
+
+  $('#cfList').innerHTML =
+    convCard('Differential expression — treated vs control','Last active Jun 7', conv1, true) +
+    convCard('Single-cell clustering — PBMC 3k','Last active Jun 4', conv2, false) +
+    convCard('Variant calling — exome trio','Last active May 29', conv3, false);
+
+  /* tab counts */
+  $('#mfCount').textContent = $$('#view-myfiles [data-file]').length;
+  $('#cfCount').textContent = $$('#view-conv [data-file]').length;
+
+  /* ---------- wiring ---------- */
   $$('.tab').forEach(t => t.addEventListener('click', () => {
     $$('.tab').forEach(x => x.classList.remove('active'));
     $$('.view').forEach(x => x.classList.remove('active'));
     t.classList.add('active'); $('#view-' + t.dataset.view).classList.add('active');
+    clearAll();
   }));
-  // conversation collapse
   $$('.conv-head').forEach(h => h.addEventListener('click', () => h.parentElement.classList.toggle('open')));
-  // folder expand (chevron only)
-  $$('.folder > .row .chev').forEach(c => c.addEventListener('click', e => { e.stopPropagation(); c.closest('.folder').classList.toggle('open'); }));
-  // theme
+  $$('.folder > .row .chev:not(.ph)').forEach(c => c.addEventListener('click', e => { e.stopPropagation(); c.closest('.folder').classList.toggle('open'); }));
   $('#themeBtn').addEventListener('click', () => { const h = document.documentElement; h.dataset.theme = h.dataset.theme === 'dark' ? 'light' : 'dark'; });
-  // NEW dropdown
   const newMenu = $('#newMenu');
   $('#newBtn').addEventListener('click', e => { e.stopPropagation(); newMenu.classList.toggle('show'); });
 
-  // ----- selection + tri-state -----
-  const selbar = $('#selbar');
-  function fileRows() { return $$('.view.active [data-file]'); }
-  function selectedFiles() { return fileRows().filter(r => r.classList.contains('selected')); }
-  function setRow(r, on) { r.classList.toggle('selected', on); r.classList.remove('indet'); }
-  function syncFolders() {
+  const selbar = $('#selbar'), confirmPop = $('#selConfirm');
+  const fileRowsActive = () => $$('.view.active [data-file]');
+  const selectedFiles = () => fileRowsActive().filter(r => r.classList.contains('selected'));
+  function setRow(r,on){ r.classList.toggle('selected',on); r.classList.remove('indet'); }
+  function syncFolders(){
     $$('.view.active .folder').forEach(f => {
       const kids = [...f.querySelectorAll('[data-file]')];
       const sel = kids.filter(k => k.classList.contains('selected')).length;
       const head = f.querySelector('.folder-row');
-      head.classList.toggle('selected', sel === kids.length && kids.length > 0);
-      head.classList.toggle('indet', sel > 0 && sel < kids.length);
+      head.classList.toggle('selected', sel===kids.length && kids.length>0);
+      head.classList.toggle('indet', sel>0 && sel<kids.length);
     });
   }
-  function refresh() {
+  function refresh(){
     syncFolders();
     const n = selectedFiles().length;
     $('#selCount').textContent = n; $('#confirmCount').textContent = n;
-    selbar.classList.toggle('show', n > 0);
-    if (n === 0) $('#selConfirm').classList.remove('show');
+    selbar.classList.toggle('show', n>0);
+    if(n===0) confirmPop.classList.remove('show');
   }
-  // row click toggles selection (folder row selects all children)
-  $$('[data-row]').forEach(row => {
-    row.addEventListener('click', e => {
-      if (e.target.closest('.actions') || e.target.closest('.chev')) return;
-      const folder = row.classList.contains('folder-row') ? row.closest('.folder') : null;
-      if (folder) {
-        const kids = [...folder.querySelectorAll('[data-file]')];
-        const allOn = kids.every(k => k.classList.contains('selected'));
-        kids.forEach(k => setRow(k, !allOn));
-      } else {
-        setRow(row, !row.classList.contains('selected'));
-      }
-      refresh();
+  function clearAll(){ fileRowsActive().forEach(r => setRow(r,false)); refresh(); }
+  function bindRows(){
+    $$('[data-row]').forEach(row => {
+      row.addEventListener('click', e => {
+        if(e.target.closest('.actions') || e.target.closest('.chev:not(.ph)')) return;
+        const folder = row.classList.contains('folder-row') ? row.closest('.folder') : null;
+        if(folder){
+          const kids = [...folder.querySelectorAll('[data-file]')];
+          const allOn = kids.every(k => k.classList.contains('selected'));
+          kids.forEach(k => setRow(k, !allOn));
+        } else setRow(row, !row.classList.contains('selected'));
+        refresh();
+      });
+      row.addEventListener('contextmenu', e => { e.preventDefault(); openCtx(e.clientX,e.clientY); });
+      row.addEventListener('dblclick', e => { if(e.target.closest('.actions')) return; openCtx(e.clientX,e.clientY); });
     });
-  });
-  $('#selClear').addEventListener('click', () => { fileRows().forEach(r => setRow(r, false)); refresh(); });
-
-  // delete confirm (sticky bar)
-  const confirmPop = $('#selConfirm');
+  }
+  bindRows();
+  $('#selClear').addEventListener('click', clearAll);
   $('#selDelete').addEventListener('click', e => { e.stopPropagation(); confirmPop.classList.toggle('show'); });
   $('#confirmNo').addEventListener('click', () => confirmPop.classList.remove('show'));
-  $('#confirmYes').addEventListener('click', () => { selectedFiles().forEach(r => { const f = r.closest('.folder'); r.remove(); }); confirmPop.classList.remove('show'); refresh(); });
+  $('#confirmYes').addEventListener('click', () => { selectedFiles().forEach(r => r.remove()); confirmPop.classList.remove('show'); refresh(); });
 
-  // ----- context menu (double-click / right-click) -----
   const ctx = $('#ctxmenu');
-  function openCtx(x, y, row) {
-    if (!row.classList.contains('selected') && !row.classList.contains('folder-row')) { /* keep current selection context */ }
-    ctx.classList.add('show');
-    const w = ctx.offsetWidth, h = ctx.offsetHeight;
-    ctx.style.left = Math.min(x, innerWidth - w - 8) + 'px';
-    ctx.style.top = Math.min(y, innerHeight - h - 8) + 'px';
-  }
-  $$('[data-row]').forEach(row => {
-    row.addEventListener('contextmenu', e => { e.preventDefault(); openCtx(e.clientX, e.clientY, row); });
-    row.addEventListener('dblclick', e => { if (e.target.closest('.actions')) return; openCtx(e.clientX, e.clientY, row); });
-  });
+  function openCtx(x,y){ ctx.classList.add('show'); const w=ctx.offsetWidth,h=ctx.offsetHeight; ctx.style.left=Math.min(x,innerWidth-w-8)+'px'; ctx.style.top=Math.min(y,innerHeight-h-8)+'px'; }
   $$('#ctxmenu button').forEach(b => b.addEventListener('click', () => ctx.classList.remove('show')));
-
-  // global dismiss
   document.addEventListener('click', e => {
-    if (!e.target.closest('#ctxmenu')) ctx.classList.remove('show');
-    if (!e.target.closest('.newWrap')) newMenu.classList.remove('show');
-    if (!e.target.closest('.sb-actions')) confirmPop.classList.remove('show');
+    if(!e.target.closest('#ctxmenu')) ctx.classList.remove('show');
+    if(!e.target.closest('.newWrap')) newMenu.classList.remove('show');
+    if(!e.target.closest('.sb-actions')) confirmPop.classList.remove('show');
   });
 
-  // demo: preselect one folder's children to show the sticky bar + indeterminate
-  const demo = $$('#view-myfiles [data-file]');
-  setRow(demo[2], true); setRow(demo[3], true); // folder B fully selected
-  setRow(demo[0], true);                         // folder A partial -> indeterminate
+  /* demo: a few files in the open folder selected -> indeterminate + sticky bar */
+  const demo = $$('#view-myfiles .folder')[0].querySelectorAll('[data-file]');
+  setRow(demo[0],true); setRow(demo[1],true); setRow(demo[2],true);
   refresh();
 </script>
 </body>
